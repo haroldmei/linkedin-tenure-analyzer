@@ -26,7 +26,7 @@ All analysis happens **locally on your computer** — we never send data to exte
 #### Step 1b: Install the Extension manually
 1. Visit [Release](https://github.com/haroldmei/linkedin-tenure-analyzer/releases) 
 2. Click **"extension.zip"** to download the release
-3. On your Chrome open [chrome://extensions](chrome://extensions), then drag **"extension.zip"** to it.
+3. On your Chrome open [chrome://extensions](chrome://extensions), turn on "Developer mode" on the top right and then drag **"extension.zip"** to it.
 
 #### Step 2: Use It
 1. Go to any LinkedIn company people page (e.g., `linkedin.com/company/google/people/`, replace `google` with a company name on LinkedIn.)
