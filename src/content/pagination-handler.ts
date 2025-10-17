@@ -175,7 +175,7 @@ export class PaginationHandler {
     ];
 
     // First try specific text matching
-    for (const button of document.querySelectorAll('button')) {
+    for (const button of Array.from(document.querySelectorAll('button'))) {
       const buttonText = button.textContent?.trim() || '';
       if (buttonText.toLowerCase().includes('show more') || 
           buttonText.toLowerCase().includes('see more') ||

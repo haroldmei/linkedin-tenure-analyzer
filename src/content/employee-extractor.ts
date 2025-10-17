@@ -137,7 +137,7 @@ export class EmployeeExtractor {
       } catch (error) {
         console.debug('[EmployeeExtractor] Could not access iframe content (CORS):', error);
         // Fall back to extracting from main page if we just loaded it
-        startDate = this.extractStartDateFromDOM();
+        startDate = this.extractStartDateFromIframeDOM(document);
       }
       
       // Clean up iframe
