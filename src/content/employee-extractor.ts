@@ -3,6 +3,8 @@ import { SELECTORS } from './selectors';
 
 export class EmployeeExtractor {
   private companyName: string = '';
+  private lastProfileFetchTime: number = 0;
+  private readonly PROFILE_FETCH_DELAY_MS = 10000; // 10 seconds
 
   setCompanyName(name: string): void {
     this.companyName = name;
@@ -83,8 +85,23 @@ export class EmployeeExtractor {
     }
   }
 
+  private async waitForRateLimit(): Promise<void> {
+    const now = Date.now();
+    const timeSinceLastFetch = now - this.lastProfileFetchTime;
+    
+    if (timeSinceLastFetch < this.PROFILE_FETCH_DELAY_MS) {
+      const waitTime = this.PROFILE_FETCH_DELAY_MS - timeSinceLastFetch;
+      console.debug(`[EmployeeExtractor] Rate limiting: waiting ${Math.ceil(waitTime / 1000)}s before next profile fetch`);
+      await new Promise(resolve => setTimeout(resolve, waitTime));
+    }
+  }
+
   private async extractStartDateFromProfile(profileUrl: string): Promise<string | null> {
     try {
+      // Apply rate limiting before fetching profile
+      await this.waitForRateLimit();
+      this.lastProfileFetchTime = Date.now();
+      
       console.debug('[EmployeeExtractor] Extracting tenure from profile:', profileUrl);
       
       // Create hidden iframe to load profile
