@@ -4,7 +4,7 @@ import { SELECTORS } from './selectors';
 export class EmployeeExtractor {
   private companyName: string = '';
   private lastProfileFetchTime: number = 0;
-  private readonly PROFILE_FETCH_DELAY_MS = 10000; // 10 seconds
+  private readonly PROFILE_FETCH_DELAY_MS = 15000; // 15 seconds
 
   setCompanyName(name: string): void {
     this.companyName = name;
