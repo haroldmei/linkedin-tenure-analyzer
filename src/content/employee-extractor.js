@@ -14,11 +14,11 @@ export class EmployeeExtractor {
             const name = this.extractWithFallback(card, SELECTORS.name);
             const location = this.extractLocation(card);
             return {
-                name,
+                name: name ?? undefined,
                 title,
                 startDate,
                 profileUrl,
-                location,
+                location: location ?? undefined,
                 isPast: false,
             };
         }

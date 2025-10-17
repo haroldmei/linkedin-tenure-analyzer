@@ -1,4 +1,4 @@
-import type { RawEmployee, ProcessedEmployee, Confidence } from '@/types';
+import type { RawEmployee, Confidence } from '@/types';
 
 export class Validators {
   static isValidEmployee(employee: Partial<RawEmployee>): employee is RawEmployee {

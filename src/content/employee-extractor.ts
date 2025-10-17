@@ -17,11 +17,11 @@ export class EmployeeExtractor {
       const location = this.extractLocation(card);
 
       return {
-        name,
+        name: name ?? undefined,
         title,
         startDate,
         profileUrl,
-        location,
+        location: location ?? undefined,
         isPast: false,
       };
     } catch (error) {
