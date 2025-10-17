@@ -36,6 +36,12 @@ All analysis happens **locally on your computer** — we never send data to exte
 
 **That's it!** 🎉
 
+### 📸 Example Results
+
+![LinkedIn Tenure Analysis Example](docs/example.png)
+
+*Example: Tenure analysis results showing employee distribution and statistics*
+
 ### 📊 Understanding Your Results
 
 **Median Tenure**: The "middle" value — if median is 2.5 years, half the employees have been there longer, half shorter.
