@@ -26,6 +26,10 @@ class CompanyAnalyzer {
 
       const employees: RawEmployee[] = [];
 
+      console.log('[Analyzer] Expanding People section to load sufficient cards...');
+      const expandedCount = await this.pagination.expandPeopleSectionToMinimum(settings.maxEmployees);
+      console.log('[Analyzer] People section expanded:', expandedCount, 'cards available');
+
       console.log('[Analyzer] Loading current employees...');
       const currentCards = await this.pagination.loadAllEmployees(settings.maxEmployees);
       console.log('[Analyzer] Current employee cards found:', currentCards.length);

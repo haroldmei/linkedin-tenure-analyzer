@@ -32,7 +32,7 @@ LinkedIn users and recruiters need insights into company employee tenure pattern
 ## 2. Functional Requirements
 
 ### FR-1: Company Page Detection
-- Extension activates ONLY on URLs matching `https://www.linkedin.com/company/*/`
+- Extension activates ONLY on URLs matching `https://www.linkedin.com/company/*/people/`
 - Display "Analyze Company" button overlay on detected pages
 - Button positioned near company header, non-intrusive
 
@@ -1410,7 +1410,7 @@ jobs:
   },
   "content_scripts": [
     {
-      "matches": ["https://www.linkedin.com/company/*/"],
+      "matches": ["https://www.linkedin.com/company/*/people/"],
       "js": ["content/analyzer.js"],
       "css": ["content/styles.css"],
       "run_at": "document_idle"

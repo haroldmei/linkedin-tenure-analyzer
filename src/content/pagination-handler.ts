@@ -29,6 +29,57 @@ export class PaginationHandler {
     return employees.slice(0, maxCount);
   }
 
+  async expandPeopleSectionToMinimum(minCards: number): Promise<number> {
+    console.log(`[PaginationHandler] Expanding People section to load at least ${minCards} cards...`);
+    
+    let cardCount = 0;
+    let attempts = 0;
+    const maxAttempts = 20;
+    const seenCards = new Set<string>();
+
+    while (cardCount < minCards && attempts < maxAttempts) {
+      const visibleCards = this.getVisibleEmployees();
+      
+      // Count unique cards
+      for (const card of visibleCards) {
+        const url = card.querySelector('a[href*="/in/"]')?.getAttribute('href');
+        if (url && !seenCards.has(url)) {
+          seenCards.add(url);
+          cardCount++;
+        }
+      }
+
+      console.log(`[PaginationHandler] Expansion progress: ${cardCount}/${minCards} cards loaded`);
+
+      if (cardCount >= minCards) {
+        console.log(`[PaginationHandler] ✓ Reached minimum card count: ${cardCount}`);
+        break;
+      }
+
+      // Try to find and click the "Show more results" button
+      const showMoreButton = this.findShowMoreButton();
+      if (!showMoreButton) {
+        console.log(`[PaginationHandler] ⚠️ No "Show more results" button found. Final count: ${cardCount}/${minCards}`);
+        break;
+      }
+
+      console.log(`[PaginationHandler] Clicking "Show more results" button...`);
+      showMoreButton.click();
+      
+      // Wait for new content to load
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      await this.waitForCondition(() => !document.querySelector('.artdeco-spinner'), 3000);
+
+      attempts++;
+    }
+
+    if (cardCount < minCards) {
+      console.log(`[PaginationHandler] ⚠️ Could only load ${cardCount}/${minCards} cards after ${attempts} attempts`);
+    }
+
+    return cardCount;
+  }
+
   private getVisibleEmployees(): Element[] {
     const selectors = [SELECTORS.employeeCard.primary, ...SELECTORS.employeeCard.fallback];
 
@@ -110,6 +161,42 @@ export class PaginationHandler {
 
   async waitForLoad(): Promise<void> {
     await this.waitForCondition(() => !document.querySelector('.artdeco-spinner'), 5000);
+  }
+
+  private findShowMoreButton(): HTMLElement | null {
+    // Look for "Show more results" button in the People section
+    const selectors = [
+      'button:contains("Show more results")',
+      'button[aria-label*="Show more"]',
+      'button[aria-label*="show more"]',
+      'button:contains("See more")',
+      'button:contains("Load more")',
+      'button:contains("More")',
+    ];
+
+    // First try specific text matching
+    for (const button of document.querySelectorAll('button')) {
+      const buttonText = button.textContent?.trim() || '';
+      if (buttonText.toLowerCase().includes('show more') || 
+          buttonText.toLowerCase().includes('see more') ||
+          buttonText.toLowerCase().includes('load more')) {
+        console.log(`[PaginationHandler] Found button: "${buttonText}"`);
+        return button;
+      }
+    }
+
+    // Try aria-label matching
+    for (const selector of selectors) {
+      if (!selector.includes(':contains')) {
+        const element = document.querySelector(selector) as HTMLElement;
+        if (element) {
+          console.log(`[PaginationHandler] Found button with selector: ${selector}`);
+          return element;
+        }
+      }
+    }
+
+    return null;
   }
 }
 
