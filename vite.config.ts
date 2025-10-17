@@ -14,7 +14,6 @@ export default defineConfig({
     rollupOptions: {
       input: {
         'background/service-worker': resolve(__dirname, 'src/background/service-worker.ts'),
-        'content/analyzer': resolve(__dirname, 'src/content/analyzer.ts'),
         'popup/popup': resolve(__dirname, 'src/popup/popup.ts'),
         'options/options': resolve(__dirname, 'src/options/options.ts'),
       },
@@ -22,8 +21,19 @@ export default defineConfig({
         entryFileNames: '[name].js',
         chunkFileNames: 'chunks/[name].js',
         assetFileNames: 'assets/[name].[ext]',
+        format: 'es',
+        manualChunks(id, { getModuleInfo }) {
+          const importers = getModuleInfo(id)?.importers || [];
+          if (importers.length === 0) {
+            return null;
+          }
+          // no special handling
+          return false;
+        },
+        inlineDynamicImports: false,
       },
     },
+    minify: false,
   },
   plugins: [
     viteStaticCopy({

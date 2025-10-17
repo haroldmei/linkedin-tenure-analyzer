@@ -34,11 +34,14 @@ export class PaginationHandler {
 
     for (const selector of selectors) {
       const elements = Array.from(document.querySelectorAll(selector));
+      console.log('[PaginationHandler] Trying selector:', selector, '→ Found:', elements.length, 'elements');
       if (elements.length > 0) {
+        console.log('[PaginationHandler] ✓ Successfully found employee cards with selector:', selector);
         return elements;
       }
     }
 
+    console.warn('[PaginationHandler] ⚠️ No employee cards found with any selector');
     return [];
   }
 

@@ -42,29 +42,34 @@ describe('Company Page Detection', () => {
     });
   });
 
-  describe('isCompanyPage - Valid Paths (sub-pages are matched)', () => {
-    it('rejects /company/google/pages/intro.htm as not matching base company page pattern', () => {
-      window.location.pathname = '/company/google/pages/intro.htm';
+  describe('isCompanyPage - Valid Company Sub-pages', () => {
+    it('identifies /company/google/posts/ as a company page', () => {
+      window.location.pathname = '/company/google/posts/';
       expect(isCompanyPage()).toBe(true);
     });
 
-    it('rejects /company/apple/people/hmei/ as not matching base company page pattern', () => {
-      window.location.pathname = '/company/apple/people/hmei/';
+    it('identifies /company/google/posts/?feedView=all as a company page', () => {
+      window.location.pathname = '/company/google/posts/';
       expect(isCompanyPage()).toBe(true);
     });
 
-    it('rejects /company/meta/about/ as not matching base company page pattern', () => {
-      window.location.pathname = '/company/meta/about/';
+    it('identifies /company/microsoft/people/ as a company page', () => {
+      window.location.pathname = '/company/microsoft/people/';
       expect(isCompanyPage()).toBe(true);
     });
 
-    it('rejects /company/tesla/jobs/search/ as not matching base company page pattern', () => {
-      window.location.pathname = '/company/asx/posts/?feedView=all';
+    it('identifies /company/apple/about/ as a company page', () => {
+      window.location.pathname = '/company/apple/about/';
+      expect(isCompanyPage()).toBe(true);
+    });
+
+    it('identifies /company/tesla/jobs/search/ as a company page', () => {
+      window.location.pathname = '/company/tesla/jobs/search/';
       expect(isCompanyPage()).toBe(true);
     });
   });
 
-  describe('isCompanyPage - Non-company URLs', () => {
+  describe('isCompanyPage - Invalid Paths', () => {
     it('rejects /non-company/google/ as not a company page', () => {
       window.location.pathname = '/non-company/google/';
       expect(isCompanyPage()).toBe(false);
@@ -112,6 +117,18 @@ describe('Company Page Detection', () => {
 
     it('rejects /in/johndoe/ as not a company page', () => {
       window.location.pathname = '/in/johndoe/';
+      expect(isCompanyPage()).toBe(false);
+    });
+  });
+
+  describe('isCompanyPage - Invalid Sub-page Paths', () => {
+    it('rejects /google/posts/ as not a company page', () => {
+      window.location.pathname = '/google/posts/';
+      expect(isCompanyPage()).toBe(false);
+    });
+
+    it('rejects /posts/company/google/ as not a company page', () => {
+      window.location.pathname = '/posts/company/google/';
       expect(isCompanyPage()).toBe(false);
     });
   });

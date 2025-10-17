@@ -20,37 +20,54 @@ class CompanyAnalyzer {
 
   async analyze(): Promise<void> {
     try {
+      console.log('[Analyzer] Starting analysis on page:', window.location.pathname);
       const settings = await StorageManager.getSettings();
       this.ui.showProgress(0, settings.maxEmployees);
 
       const employees: RawEmployee[] = [];
 
+      console.log('[Analyzer] Loading current employees...');
       const currentCards = await this.pagination.loadAllEmployees(settings.maxEmployees);
+      console.log('[Analyzer] Current employee cards found:', currentCards.length);
+      
       for (const card of currentCards) {
         await this.rateLimiter.throttle();
-        const emp = this.extractor.extract(card);
+        const emp = await this.extractor.extract(card);
         if (emp) {
           employees.push(emp);
+          console.log('[Analyzer] Extracted employee:', emp.name, emp.title);
         }
         this.ui.updateProgress(employees.length, settings.maxEmployees);
       }
 
+      console.log('[Analyzer] Current employees extracted:', employees.length);
+
       if (settings.enablePastEmployees) {
+        console.log('[Analyzer] Attempting to navigate to past employees...');
         const navigated = await this.navigateToPast();
+        console.log('[Analyzer] Navigation to past employees:', navigated ? 'SUCCESS' : 'FAILED');
+        
         if (navigated) {
           const pastCards = await this.pagination.loadAllEmployees(settings.maxEmployees);
+          console.log('[Analyzer] Past employee cards found:', pastCards.length);
+          
           for (const card of pastCards) {
             await this.rateLimiter.throttle();
-            const emp = this.extractor.extract(card);
+            const emp = await this.extractor.extract(card);
             if (emp) {
               emp.isPast = true;
               employees.push(emp);
+              console.log('[Analyzer] Extracted past employee:', emp.name, emp.title);
             }
           }
         }
       }
 
+      console.log('[Analyzer] Total employees collected:', employees.length);
+
       if (employees.length === 0) {
+        console.error('[Analyzer] ⚠️ No employees found. Page URL:', window.location.href);
+        console.error('[Analyzer] ⚠️ This might be a non-employee page (posts, jobs, etc.)');
         throw new Error('No employee data found. Please ensure you are on a company page.');
       }
 
@@ -61,16 +78,20 @@ class CompanyAnalyzer {
         companyName: this.extractCompanyName(),
       };
 
+      console.log('[Analyzer] Sending analysis request for company:', request.companyName);
       const response = await chrome.runtime.sendMessage(request) as AnalysisResponse;
 
       if (response.success && response.stats) {
+        console.log('[Analyzer] Analysis successful. Median tenure:', response.stats.median, 'months');
         this.ui.showResults(response.stats);
         this.setupExportHandlers();
       } else {
+        console.error('[Analyzer] Analysis failed:', response.error);
         this.ui.showError(response.error || 'Analysis failed');
       }
     } catch (error) {
       const message = error instanceof Error ? error.message : 'Unknown error occurred';
+      console.error('[Analyzer] Error:', message);
       this.ui.showError(message);
       console.error('[Analyzer]', error);
     }

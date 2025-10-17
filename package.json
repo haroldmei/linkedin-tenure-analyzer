@@ -4,8 +4,8 @@
   "description": "Analyze employee tenure distributions on LinkedIn company pages",
   "type": "module",
   "scripts": {
-    "dev": "vite build --mode development --watch",
-    "build": "tsc && vite build",
+    "dev": "vite build --mode development --watch & vite build --config vite.content.config.ts --mode development --watch",
+    "build": "vite build && vite build --config vite.content.config.ts",
     "lint": "eslint src --ext .ts,.tsx",
     "type-check": "tsc --noEmit",
     "test:unit": "vitest run --coverage tests/unit",

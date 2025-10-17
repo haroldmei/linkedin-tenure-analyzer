@@ -9,8 +9,30 @@ export class UIManager {
       return;
     }
 
-    const header = document.querySelector('.org-top-card');
-    if (!header) return;
+    console.log('[UIManager] Injecting analyze button');
+
+    const selectors = [
+      '.org-top-card',
+      '[data-view-name="feed-container"]',
+      'main',
+      'body',
+    ];
+
+    let header: Element | null = null;
+    for (const selector of selectors) {
+      console.log('[UIManager] Trying selector:', selector);
+      header = document.querySelector(selector);
+      if (header) {
+        console.log('[UIManager] Found header element:', header);
+        break;
+      }
+    }
+
+    if (!header) {
+      console.warn('[UIManager] ⚠️ Could not find header element for button injection');
+      return;
+    }
+    console.log('[UIManager] ✓ Found header element:', header);
 
     const button = document.createElement('button');
     button.id = 'linkedin-tenure-analyzer-btn';
@@ -25,6 +47,8 @@ export class UIManager {
     } else {
       header.appendChild(button);
     }
+
+    console.log('[UIManager] Analyze button injected successfully');
   }
 
   getAnalyzeButton(): HTMLElement | null {
