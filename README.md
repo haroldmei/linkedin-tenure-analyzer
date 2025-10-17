@@ -19,12 +19,12 @@ All analysis happens **locally on your computer** — we never send data to exte
 ### ⚡ Quick Start (5 Minutes)
 
 #### Step 1a: Install the Extension from WebStore (coming soon)
-1. Visit [Chrome Web Store](https://github.com/haroldmei/linkedin-tenure-analyzer/releases) 
+1. Visit [Chrome Web Store](https://chrome.google.com/webstore) 
 2. Click **"Add to Chrome"**
 3. Confirm the installation
 
 #### Step 1b: Install the Extension manually
-1. Visit [linkedin-tenure-analyzer Release](https://chrome.google.com/webstore) 
+1. Visit [Release](https://github.com/haroldmei/linkedin-tenure-analyzer/releases) 
 2. Click **"extension.zip"** to download the release
 3. On your Chrome open [chrome://extensions](chrome://extensions), then drag **"extension.zip"** to it.
 
