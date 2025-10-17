@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LinkedIn Tenure Analyzer</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="app">
+    <header class="header">
+      <h1>Tenure Analysis</h1>
+    </header>
+
+    <div id="empty-state" class="empty-state">
+      <div class="empty-icon">📊</div>
+      <h2>No Analysis Yet</h2>
+      <p>Visit a LinkedIn company page and click "Analyze Tenure" to get started.</p>
+    </div>
+
+    <div id="results-container" class="results-container" style="display: none;">
+      <div class="company-info">
+        <h2 id="company-name">Company Name</h2>
+        <p id="analysis-date" class="meta-text">Analyzed on: <span></span></p>
+      </div>
+
+      <div class="stats-grid" id="stats-grid">
+        <!-- Stats will be dynamically inserted here -->
+      </div>
+
+      <div class="histogram-section">
+        <h3>Tenure Distribution</h3>
+        <div id="histogram-container"></div>
+      </div>
+
+      <div class="quality-section">
+        <h3>Data Quality</h3>
+        <div id="quality-info"></div>
+      </div>
+
+      <div class="actions">
+        <button id="export-csv" class="btn btn-secondary">Export CSV</button>
+        <button id="export-json" class="btn btn-secondary">Export JSON</button>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <a href="../options/index.html" target="_blank" class="link">Settings</a>
+      <span class="divider">•</span>
+      <button id="clear-data" class="link-button">Clear Data</button>
+    </footer>
+  </div>
+
+  <script type="module" src="popup.js"></script>
+</body>
+</html>
+

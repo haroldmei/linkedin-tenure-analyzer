@@ -1,0 +1,57 @@
+/* LinkedIn Tenure Analyzer - Content Script Styles */
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+#linkedin-tenure-analyzer-btn:hover {
+  background-color: rgba(0, 0, 0, 0.08);
+}
+
+#linkedin-tenure-analyzer-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+#tenure-analyzer-progress,
+#tenure-analyzer-results {
+  font-family: -apple-system, system-ui, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', 'Fira Sans', Ubuntu, Oxygen, 'Oxygen Sans', Cantarell, 'Droid Sans', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Lucida Grande', Helvetica, Arial, sans-serif;
+}
+
+#tenure-analyzer-results button:hover {
+  background-color: rgba(0, 0, 0, 0.08);
+}
+
+.tenure-analyzer-error {
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tenure-analyzer-error {
+    animation: none;
+  }
+  
+  #tenure-analyzer-progress .tenure-analyzer-progress-fill {
+    transition: none;
+  }
+}
+

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Settings - LinkedIn Tenure Analyzer</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <h1>Settings</h1>
+      <p class="subtitle">Configure your LinkedIn Tenure Analyzer</p>
+    </header>
+
+    <main class="content">
+      <section class="section">
+        <h2>Analysis Settings</h2>
+        
+        <div class="setting-item">
+          <label for="max-employees" class="setting-label">
+            Maximum Employees to Analyze
+            <span class="setting-description">Limit the number of employee profiles processed per analysis (10-100)</span>
+          </label>
+          <div class="slider-container">
+            <input type="range" id="max-employees" min="10" max="100" step="10" value="50">
+            <span id="max-employees-value" class="slider-value">50</span>
+          </div>
+        </div>
+
+        <div class="setting-item">
+          <label class="checkbox-label">
+            <input type="checkbox" id="enable-past-employees" checked>
+            <span>Include Past Employees</span>
+          </label>
+          <p class="setting-description">When enabled, the analyzer will also process former employees for a complete picture.</p>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Appearance</h2>
+        
+        <div class="setting-item">
+          <label for="theme" class="setting-label">Theme</label>
+          <select id="theme" class="select-input">
+            <option value="auto">Auto (Follow System)</option>
+            <option value="light">Light</option>
+            <option value="dark">Dark</option>
+          </select>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Data Management</h2>
+        
+        <div class="setting-item">
+          <button id="clear-cache" class="btn btn-secondary">Clear Cache</button>
+          <p class="setting-description">Remove cached analysis data. Your settings will be preserved.</p>
+        </div>
+
+        <div class="setting-item">
+          <button id="clear-all-data" class="btn btn-danger">Clear All Data</button>
+          <p class="setting-description">Remove all stored data including settings. This action cannot be undone.</p>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>About</h2>
+        
+        <div class="about-info">
+          <p><strong>LinkedIn Tenure Analyzer</strong></p>
+          <p>Version 1.0.0</p>
+          <p class="setting-description">Analyze employee tenure distributions on LinkedIn company pages with privacy and compliance in mind.</p>
+          
+          <div class="disclaimer">
+            <strong>⚠️ Important Notice</strong>
+            <p>This is an unofficial tool not affiliated with LinkedIn. Use responsibly and in compliance with LinkedIn's Terms of Service. All data is stored locally on your device.</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="save-container">
+        <button id="save-settings" class="btn btn-primary">Save Settings</button>
+        <span id="save-status" class="save-status"></span>
+      </div>
+    </main>
+  </div>
+
+  <script type="module" src="options.js"></script>
+</body>
+</html>
+
