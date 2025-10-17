@@ -29,7 +29,7 @@ All analysis happens **locally on your computer** — we never send data to exte
 3. On your Chrome open [chrome://extensions](chrome://extensions), then drag **"extension.zip"** to it.
 
 #### Step 2: Use It
-1. Go to any LinkedIn company page (e.g., `linkedin.com/company/google/people/`)
+1. Go to any LinkedIn company people page (e.g., `linkedin.com/company/google/people/`, replace `google` with a company name on LinkedIn.)
 2. Look for the **"📊 Analyze Tenure"** button near the company information
 3. Click it and wait 2-3 minutes for analysis to complete
 4. View results and download as CSV or JSON
