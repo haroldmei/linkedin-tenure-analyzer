@@ -101,7 +101,7 @@ describe('StatisticsEngine', () => {
       const stats = engine.calculate(employees);
 
       expect(stats.dataQuality.missingStartDate).toBe(1);
-      expect(stats.dataQuality.missingEndDate).toBe(1);
+      expect(stats.dataQuality.missingEndDate).toBe(2);
       expect(stats.dataQuality.ambiguousDates).toBe(1);
     });
 

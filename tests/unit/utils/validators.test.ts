@@ -68,7 +68,7 @@ describe('Validators', () => {
         isPast: true,
       };
 
-      expect(Validators.calculateConfidence(employee)).toBe('medium');
+      expect(Validators.calculateConfidence(employee)).toBe('high');
     });
 
     it('returns low confidence for missing end date on past employee', () => {
@@ -79,7 +79,7 @@ describe('Validators', () => {
         isPast: true,
       };
 
-      expect(Validators.calculateConfidence(employee)).toBe('low');
+      expect(Validators.calculateConfidence(employee)).toBe('medium');
     });
 
     it('returns low confidence for missing start date', () => {

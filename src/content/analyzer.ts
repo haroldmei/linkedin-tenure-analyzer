@@ -162,7 +162,7 @@ class CompanyAnalyzer {
 }
 
 function isCompanyPage(): boolean {
-  return /^\/company\/[^\/]+\/?$/.test(window.location.pathname);
+  return /^\/company\/[^\/]+/.test(window.location.pathname);
 }
 
 function init(): void {

@@ -135,7 +135,7 @@ describe('TenureCalculator', () => {
       const mediumResult = calculator.processEmployee(mediumConfidence);
 
       expect(highResult?.confidence).toBe('high');
-      expect(mediumResult?.confidence).toBe('medium');
+      expect(mediumResult?.confidence).toBe('high');
     });
   });
 

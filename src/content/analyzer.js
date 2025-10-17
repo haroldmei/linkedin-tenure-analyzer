@@ -137,7 +137,7 @@ class CompanyAnalyzer {
     }
 }
 function isCompanyPage() {
-    return /^\/company\/[^\/]+\/?$/.test(window.location.pathname);
+    return /^\/company\/[^\/]+/.test(window.location.pathname);
 }
 function init() {
     if (!isCompanyPage())
