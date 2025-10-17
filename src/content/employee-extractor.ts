@@ -192,7 +192,7 @@ export class EmployeeExtractor {
     return null;
   }
 
-  private parseStartDateFromProfileHTML(html: string): string | null {
+  private parseStartDateFromProfileHTML(_html: string): string | null {
     // Deprecated - keeping for reference but not used
     console.debug('[EmployeeExtractor] HTML parsing no longer used (using DOM extraction instead)');
     return null;

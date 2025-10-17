@@ -119,7 +119,7 @@ class CompanyAnalyzer {
   }
 
   private extractCompanyId(): string {
-    const match = window.location.pathname.match(/\/company\/([^\/]+)/);
+    const match = window.location.pathname.match(/\/company\/([^/]+)/);
     return match ? match[1] : 'unknown';
   }
 
@@ -187,7 +187,7 @@ class CompanyAnalyzer {
 }
 
 function isCompanyPage(): boolean {
-  return /^\/company\/[^\/]+/.test(window.location.pathname);
+  return /^\/company\/[^/]+/.test(window.location.pathname);
 }
 
 function init(): void {

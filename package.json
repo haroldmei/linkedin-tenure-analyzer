@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "Analyze employee tenure distributions on LinkedIn company pages",
   "type": "module",
+  "engines": {
+    "node": ">=20.0.0",
+    "npm": ">=10.0.0"
+  },
   "scripts": {
     "dev": "vite build --mode development --watch & vite build --config vite.content.config.ts --mode development --watch",
     "build": "vite build && vite build --config vite.content.config.ts",
